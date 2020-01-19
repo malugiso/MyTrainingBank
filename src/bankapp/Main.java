@@ -13,6 +13,8 @@ public class Main {
 
 		poloBank.registerCustomer("cust1", "123");
 
+		// System.out.println(poloBank.);
+
 	}
 
 }

@@ -4,7 +4,7 @@ public class Customer {
 
 	private Account[] accounts;
 
-	private static int MAX_ACCOUNTS;
+	private static int MAX_ACCOUNTS = 100;
 
 	private String name;
 	private int nr;
@@ -15,6 +15,63 @@ public class Customer {
 		this.nr = nr;
 		this.name = name;
 		this.password = password;
+	}
+
+	/**
+	 * 
+	 * @param password
+	 * @return
+	 */
+	protected boolean checkPaswort(String password) {
+		return this.password.equals(password);
+	}
+
+	/**
+	 * 
+	 * @param account
+	 * @return
+	 */
+	protected boolean addAccount(Account account) {
+		if (numAccounts == MAX_ACCOUNTS) {
+			return false;
+		}
+
+		numAccounts++;
+		accounts[numAccounts] = account;
+
+		return true;
+	}
+
+	/**
+	 * 
+	 * @param nr
+	 * @return
+	 */
+	public Account findAccount(int nr) {
+		Account acc = null;
+		for (int i = 1; i <= numAccounts; i++) {
+			if (accounts[i].getNr() == nr) {
+				acc = accounts[i];
+			}
+		}
+
+		return acc;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Account[] getAccounts() {
+		return accounts;
+	}
+
+	public double getTotalBalance() {
+		double totalBalance = 0.00;
+		for (int i = 0; i < numAccounts; i++) {
+			totalBalance += accounts[i].getBalance();
+		}
+		return totalBalance;
 	}
 
 	/**
