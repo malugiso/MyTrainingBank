@@ -2,13 +2,13 @@ package bankapp.bank;
 
 public class Customer {
 
-	private Account[] accounts;
+	private Account[] accounts = new Account[MAX_ACCOUNTS];
 
 	private static int MAX_ACCOUNTS = 100;
 
 	private String name;
 	private int nr;
-	private int numAccounts;
+	private int numAccounts = 0;
 	private String password;
 
 	protected Customer(int nr, String name, String password) {
@@ -32,12 +32,12 @@ public class Customer {
 	 * @return
 	 */
 	protected boolean addAccount(Account account) {
-		if (numAccounts == MAX_ACCOUNTS) {
+		if (numAccounts == MAX_ACCOUNTS || account.equals(null)) {
 			return false;
 		}
 
 		numAccounts++;
-		accounts[numAccounts] = account;
+		accounts[numAccounts - 1] = account;
 
 		return true;
 	}
@@ -49,7 +49,7 @@ public class Customer {
 	 */
 	public Account findAccount(int nr) {
 		Account acc = null;
-		for (int i = 1; i <= numAccounts; i++) {
+		for (int i = 0; i < numAccounts; i++) {
 			if (accounts[i].getNr() == nr) {
 				acc = accounts[i];
 			}
@@ -93,6 +93,21 @@ public class Customer {
 	 */
 	public int getNr() {
 		return nr;
+	}
+
+	public int countElements(Account[] obj) {
+		int counter = 0;
+		for (Account el : obj) {
+			if (el != null) {
+				counter++;
+			}
+		}
+		return counter;
+	}
+
+	public String toString() {
+		return "Name: " + getName() + "\nID: " + getNr() + "\nNum Accounts: " + countElements(accounts);
+
 	}
 
 }

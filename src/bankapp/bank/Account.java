@@ -77,7 +77,7 @@ public class Account {
 	}
 
 	public String toString() {
-		return "Account Num: " + this.nr + "\nAccount Balance: " + this.balance;
+		return "Account Num: " + nr + " => Account Balance: " + balance;
 	}
 
 }
